@@ -9,7 +9,7 @@ const Navbar: React.FC = () => {
   const [user, loading, error] = useAuthState(auth);
   return (
     <Flex bg="white" height="44px" padding="6px 12px">
-      <Flex align="center">
+      <Flex align="center" mr={2}>
         <Image src="/images/redditFace.svg" height="30px" alt="Reddit Logo" />
         <Image
           src="/images/redditText.svg"
