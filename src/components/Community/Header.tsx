@@ -3,14 +3,22 @@ import Image from "next/image";
 import React from "react";
 import { FaReddit } from "react-icons/fa";
 import { Community } from "../../atoms/communitiesAtom";
+import useCommunityData from "../../hooks/useCommunityData";
 
 type CommunityHeaderProps = {
   communityData: Community;
 };
 
 const CommunityHeader: React.FC<CommunityHeaderProps> = ({ communityData }) => {
-  // read from community snipper
-  const isJoined = false;
+  const { communityStateValue, onJoinOrLeaveCommunity, loading } =
+    useCommunityData();
+
+  // !! booleanizes the result,
+  //*  undefined=>false | foundAValueInArray=>true
+  const isJoined = !!communityStateValue.mySnippets.find(
+    (item) => item.communityId === communityData.id
+  );
+
   return (
     <Flex direction="column" width="100%" height="146px">
       <Box height="50%" bg="blue.400" />
@@ -42,7 +50,8 @@ const CommunityHeader: React.FC<CommunityHeaderProps> = ({ communityData }) => {
               height="30px"
               pl={6}
               pr={6}
-              onClick={() => {}}
+              isLoading={loading}
+              onClick={() => onJoinOrLeaveCommunity(communityData, isJoined)}
               variant={isJoined ? "outline" : "solid"}
             >
               {isJoined ? "Joined" : "Join"}
