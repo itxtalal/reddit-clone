@@ -8,7 +8,7 @@ import safeJsonStringify from "safe-json-stringify";
 import CommunityNotFound from "../../../components/Community/NotFound";
 import CommunityHeader from "../../../components/Community/Header";
 import PageContent from "../../../components/Layout/PageContent";
-import CreatePostLink from "../../../components/community/CreatePostLink";
+import CreatePostLink from "../../../components/Community/CreatePostLink";
 import Posts from "../../../components/Posts/Posts";
 import { useSetRecoilState } from "recoil";
 import About from "../../../components/Community/About";
@@ -25,11 +25,13 @@ const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
     return <CommunityNotFound />;
   }
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     setCommunityStateValue((prev) => ({
       ...prev,
       currentCommunity: communityData,
     }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
