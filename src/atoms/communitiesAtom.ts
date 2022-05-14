@@ -7,7 +7,7 @@ export interface Community {
   createdAt?: Timestamp;
   numberOfMembers: number;
   privacyType: "public" | "restricted" | "private";
-  imageUrl?: "string";
+  imageURL?: "string";
 }
 
 export interface CommunitySnippet {
@@ -18,7 +18,7 @@ export interface CommunitySnippet {
 
 interface CommunityState {
   mySnippets: CommunitySnippet[];
-  // visitedCommunities
+  currentCommunity?: Community;
 }
 
 const defaultCommunityState: CommunityState = {

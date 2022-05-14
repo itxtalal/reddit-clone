@@ -61,7 +61,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
             type="file"
             onChange={onSelectImage}
           />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
         </Flex>
       )}
     </Flex>

@@ -1,7 +1,7 @@
 import { doc, getDoc } from "firebase/firestore";
 import { GetServerSidePropsContext } from "next";
-import React from "react";
-import { Community } from "../../../atoms/communitiesAtom";
+import React, { useEffect } from "react";
+import { Community, communityState } from "../../../atoms/communitiesAtom";
 import { firestore } from "../../../firebase/clientApp";
 //! Serialization Error due to Timestamp of Firestore, so to avoid that, safeJsonStringify package used to safely parse data
 import safeJsonStringify from "safe-json-stringify";
@@ -10,15 +10,28 @@ import CommunityHeader from "../../../components/Community/Header";
 import PageContent from "../../../components/Layout/PageContent";
 import CreatePostLink from "../../../components/community/CreatePostLink";
 import Posts from "../../../components/Posts/Posts";
+import { useSetRecoilState } from "recoil";
+import About from "../../../components/Community/About";
 type CommunityPageProps = {
   communityData: Community;
 };
 
 const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
+  const setCommunityStateValue = useSetRecoilState(communityState);
+
   // console.log("data", communityData);
+
   if (!communityData) {
     return <CommunityNotFound />;
   }
+
+  useEffect(() => {
+    setCommunityStateValue((prev) => ({
+      ...prev,
+      currentCommunity: communityData,
+    }));
+  }, []);
+
   return (
     <>
       <CommunityHeader communityData={communityData} />
@@ -28,7 +41,7 @@ const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
           <Posts communityData={communityData} />
         </>
         <>
-          <div>RHS</div>
+          <About communityData={communityData} />
         </>
       </PageContent>
     </>
