@@ -1,34 +1,68 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">Welcome to Reddit Clone 👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
+  <a href="https://twitter.com/mtalalj" target="_blank">
+    <img alt="Twitter: mtalalj" src="https://img.shields.io/twitter/follow/mtalalj.svg?style=social" />
+  </a>
+</p>
 
-## Getting Started
+> ## Reddit Clone
+>
+> This is a clone of Reddit, a web app where users can signup to join communities, in which they can create posts, view posts of other users, upvote or downvote them in the community, comment on a post or delete their own post.
+>
+> ## Build Technologies
+>
+> - ✅ NEXTJS
+> - ✅ FIREBASE V9
+>   - Authentication
+>   - Firestore Database (w/ Real-time data)
+>   - Cloud Functions
+>   - Firebase Storage
+>   - Security Rules
+>   - Transactions & Batch Writes
+> - ✅ CHAKRA UI
+> - ✅ TYPESCRIPT
+> - ✅ RECOIL (State Management)
+> - 🚀 Deployment
 
-First, run the development server:
+### ✨ [Demo](https://reddit-cloney.netlify.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
+## Install
+
+```sh
+yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment Variables
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```
+NEXT_PUBLIC_FIREBASE_API_KEY
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+NEXT_PUBLIC_FIREBASE_PROJECT_ID
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+NEXT_PUBLIC_FIREBASE__MESSAGING_SENDER_ID
+NEXT_PUBLIC_FIREBASE__APP_ID
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Usage
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```sh
+yarn run start
+```
 
-## Learn More
+## Author
 
-To learn more about Next.js, take a look at the following resources:
+👤 **Talal**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Twitter: [@mtalalj](https://twitter.com/mtalalj)
+- Github: [@itxtalal](https://github.com/itxtalal)
+- LinkedIn: [@itxtalal](https://linkedin.com/in/itxtalal)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Show your support
 
-## Deploy on Vercel
+<p>Give a ⭐️ if this project helped you!</p>
+<a href="https://www.buymeacoffee.com/itxtalal"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="200" /></a>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_

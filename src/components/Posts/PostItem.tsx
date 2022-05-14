@@ -1,4 +1,14 @@
-import { Flex, Icon, Stack, Text, Image, Skeleton } from "@chakra-ui/react";
+import {
+  Flex,
+  Icon,
+  Stack,
+  Text,
+  Image,
+  Skeleton,
+  Spinner,
+  Alert,
+  AlertIcon,
+} from "@chakra-ui/react";
 import moment from "moment";
 import React, { useState } from "react";
 import {
@@ -18,7 +28,7 @@ type PostItemProps = {
   userIsCreator: boolean;
   userVoteValue?: number;
   onVote: () => {};
-  onDeletePost: () => {};
+  onDeletePost: (post: Post) => Promise<boolean>;
   onSelectPost: () => void;
 };
 
@@ -31,6 +41,29 @@ const PostItem: React.FC<PostItemProps> = ({
   onSelectPost,
 }) => {
   const [imageLoading, setImageLoading] = useState(true);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+
+  const [error, setError] = useState("");
+
+  const handleDelete = async () => {
+    setDeleteLoading(true);
+
+    try {
+      // await function always returns a Promise,
+      const success = await onDeletePost(post);
+
+      if (!success) {
+        throw new Error(`Failed to delete post ${post.id} ${post.title}`);
+      }
+
+      // console.log("✅ Post was successfully deleted.");
+    } catch (error: any) {
+      setError(error.msg);
+    }
+
+    setDeleteLoading(false);
+  };
+
   return (
     <Flex
       border="1px solid"
@@ -73,6 +106,12 @@ const PostItem: React.FC<PostItemProps> = ({
         />
       </Flex>
       <Flex direction="column" width="100%">
+        {error && (
+          <Alert status="error">
+            <AlertIcon />
+            <Text mr={2}>{error}</Text>
+          </Alert>
+        )}
         <Stack spacing={1} p="10px">
           <Stack direction="row" spacing={0.6} align="center" fontSize="9pt">
             {/* Home Page Check */}
@@ -138,10 +177,16 @@ const PostItem: React.FC<PostItemProps> = ({
               borderRadius={4}
               _hover={{ bg: "gray.200" }}
               cursor="pointer"
-              onClick={onDeletePost}
+              onClick={handleDelete}
             >
-              <Icon as={AiOutlineDelete} mr={2} />
-              <Text fontSize=" 9pt">Delete</Text>
+              {deleteLoading ? (
+                <Spinner size="sm" />
+              ) : (
+                <>
+                  <Icon as={AiOutlineDelete} mr={2} />
+                  <Text fontSize=" 9pt">Delete</Text>
+                </>
+              )}
             </Flex>
           )}
         </Flex>
