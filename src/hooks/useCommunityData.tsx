@@ -139,7 +139,15 @@ const useCommunityData = () => {
   };
 
   useEffect(() => {
-    if (!user) return;
+    // when log back in, get postVotes
+    if (!user) {
+      setCommunityStateValue((prev) => ({
+        ...prev,
+        mySnippets: [],
+      }));
+
+      return;
+    }
     getMySnippets();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
