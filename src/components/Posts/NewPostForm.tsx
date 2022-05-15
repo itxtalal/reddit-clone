@@ -31,6 +31,7 @@ import useSelectFile from "../../hooks/useSelectFile";
 
 type NewPostFormProps = {
   user: User;
+  communityImageURL?: string;
 };
 
 const formTabs: TabItem[] = [
@@ -61,7 +62,10 @@ export type TabItem = {
   icon: typeof Icon.arguments;
 };
 
-const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
+const NewPostForm: React.FC<NewPostFormProps> = ({
+  user,
+  communityImageURL,
+}) => {
   const router = useRouter();
   const [selectedTab, setSelectedTab] = useState(formTabs[0].title);
 
@@ -79,6 +83,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
     // create new POST object
     const newPost: Post = {
       communityId: communityId as string,
+      communityImageURL: communityImageURL || "",
       creatorId: user?.uid,
       // ! means we are sure that there is always a user who has a email field, i.e. it is not null
       creatorDisplayName: user.email!.split("@")[0],
