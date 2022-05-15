@@ -14,8 +14,11 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRecoilValue } from "recoil";
 import { communityState } from "../atoms/communitiesAtom";
-import { Post } from "../atoms/postAtom";
+import { Post, PostVote } from "../atoms/postAtom";
 import CreatePostLink from "../components/Community/CreatePostLink";
+import PersonalHome from "../components/Community/PersonalHome";
+import Premium from "../components/Community/Premium";
+import Recommendations from "../components/Community/Recommendations";
 import PageContent from "../components/Layout/PageContent";
 import PostItem from "../components/Posts/PostItem";
 import PostLoader from "../components/Posts/PostLoader";
@@ -96,7 +99,28 @@ const Home: NextPage = () => {
     setLoading(false);
   };
 
-  const getUserPostVotes = () => {};
+  const getUserPostVotes = async () => {
+    try {
+      const postIds = postStateValue.posts.map((post) => post.id);
+      const postVotesQuery = query(
+        collection(firestore, `users/${user?.uid}/postVotes`),
+        where("postId", "in", postIds)
+      );
+
+      const postVotesDocs = await getDocs(postVotesQuery);
+      const postVotes = postVotesDocs.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      setPostStateValue((prev) => ({
+        ...prev,
+        postVotes: postVotes as PostVote[],
+      }));
+    } catch (error) {
+      console.log("getUserPostVotes Error", error);
+    }
+  };
 
   // use Effects
 
@@ -109,6 +133,18 @@ const Home: NextPage = () => {
     if (!user && !loadingUser) buildNoUserHomeFeed();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loadingUser, user]);
+
+  useEffect(() => {
+    if (user && postStateValue.posts.length) getUserPostVotes();
+
+    return () => {
+      setPostStateValue((prev) => ({
+        ...prev,
+        postVotes: [],
+      }));
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, postStateValue.posts]);
 
   return (
     <PageContent>
@@ -137,8 +173,11 @@ const Home: NextPage = () => {
           </Stack>
         )}
       </>
-      {/* Recommendation */}
-      <></>
+      <Stack spacing={5}>
+        <Recommendations />
+        <Premium />
+        <PersonalHome />
+      </Stack>
     </PageContent>
   );
 };
