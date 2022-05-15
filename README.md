@@ -1,5 +1,4 @@
 <h1 align="center">Welcome to Reddit Clone 👋</h1>
-<p>Under Development 👨‍💻</p>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
   <a href="https://twitter.com/mtalalj" target="_blank">
