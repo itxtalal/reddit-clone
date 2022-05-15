@@ -25,7 +25,7 @@
 > - ✅ RECOIL (State Management)
 > - 🚀 Deployment
 
-### ✨ [Demo](https://reddit-cloney.netlify.app/)
+### ✨ [Demo](https://reddit-clone-five-iota.vercel.app/)
 
 ## Install
 
